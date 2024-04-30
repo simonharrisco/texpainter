@@ -1,0 +1,38 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body
+{
+    overflow: hidden;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    outline: none;
+}
+
+.view-container{
+    display: flex;
+
+}
+
+#tex-holder{
+    position: fixed;
+    display: block;
+    top: 10px;
+    right :10px;
+}
+#tex-canvas{
+    height:512px;
+    width: 512px;
+    padding: 0px;
+    margin: 0px;
+}
