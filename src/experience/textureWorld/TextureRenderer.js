@@ -9,8 +9,6 @@ export default class TextureRenderer {
     this.scene = this.experience.texScene;
     this.camera = this.experience.texCamera.instance;
 
-    this.renderTarget = new THREE.WebGLRenderTarget(600, 600);
-
     this.setInstance();
   }
 
@@ -24,10 +22,6 @@ export default class TextureRenderer {
   }
 
   update() {
-    this.instance.setRenderTarget(this.renderTarget);
-    this.instance.render(this.scene, this.camera);
-
-    this.instance.setRenderTarget(null);
     this.instance.render(this.scene, this.camera);
   }
 }

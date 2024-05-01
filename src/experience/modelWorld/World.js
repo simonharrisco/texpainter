@@ -64,9 +64,12 @@ export default class World {
     // only pay attention to meshs
     intersects.forEach((intersect) => {
       if (intersect.object.name != "floor" && intersect.object.name != "grid") {
-        this.experience.texWorld.handleIntersect(intersect);
+        relevant.push(intersect);
       }
     });
+    if (relevant.length > 0) {
+      this.experience.texWorld.handleIntersect(relevant[0]);
+    }
   }
   playAnimation() {}
 }
