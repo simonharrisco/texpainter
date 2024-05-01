@@ -3,11 +3,11 @@ import assetPaths from "../assets/paths/initialAssetPaths";
 import Sizes from "./utils/Sizes";
 import Time from "./utils/Time";
 import Resources from "./utils/Resources";
-import Camera from "./Camera";
-import Renderer from "./Renderer";
-import World from "./world/World";
-import TextureCamera from "./TextureCamera";
-import TextureRenderer from "./TextureRenderer";
+import Camera from "./modelWorld/Camera";
+import Renderer from "./modelWorld/Renderer";
+import World from "./modelWorld/World";
+import TextureCamera from "./textureWorld/TextureCamera";
+import TextureRenderer from "./textureWorld/TextureRenderer";
 import TextureWorld from "./textureWorld/TextureWorld";
 
 // turning the experience into a singleton.

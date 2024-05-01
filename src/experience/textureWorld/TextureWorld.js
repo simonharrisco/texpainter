@@ -20,8 +20,8 @@ export default class TextureWorld {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.mesh);
   }
-  setMaterialTexture(texture) {
-    console.log(texture);
+  setMaterialTexture(child) {
+    let texture = child.material.map;
     this.scene.remove(this.mesh);
     this.texture = texture;
 
@@ -35,7 +35,44 @@ export default class TextureWorld {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.material.map = this.texture;
     this.mesh.material.needsUpdate = true;
-
+    this.mesh.position.set(0, 0, 0);
     this.scene.add(this.mesh);
+
+    this.displayGeometry = new THREE.BufferGeometry();
+    this.refToUvArray = child.geometry.attributes.uv.array;
+    this.vertArrayFromUvs = [];
+
+    for (let i = 0; i < this.refToUvArray.length; i += 2) {
+      let x = (this.refToUvArray[i] % 1) * 2 - 1;
+      let y = (this.refToUvArray[i + 1] % 1) * 2 - 1;
+      this.vertArrayFromUvs.push(x, y, 0);
+    }
+
+    this.vertices = new Float32Array(this.vertArrayFromUvs);
+    this.displayGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(this.vertices, 3)
+    );
+
+    if (child.geometry.index) {
+      this.displayGeometry.setIndex(child.geometry.index);
+    }
+
+    this.displayMaterial = new THREE.MeshBasicMaterial({
+      color: 0xff0000,
+      wireframe: true,
+    });
+
+    this.displayMesh = new THREE.Mesh(
+      this.displayGeometry,
+      this.displayMaterial
+    );
+    this.displayMesh.position.set(0, 0, 0);
+
+    this.scene.add(this.displayMesh);
+  }
+  destroy() {
+    this.scene.remove(this.mesh);
+    this.scene.remove(this.displayMesh);
   }
 }
