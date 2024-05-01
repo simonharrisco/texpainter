@@ -18,6 +18,7 @@ export default class TextureRenderer {
       canvas: this.canvas,
       antialias: true,
     });
+    this.instance.setSize(600, 600);
   }
 
   update() {

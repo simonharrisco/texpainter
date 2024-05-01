@@ -26,8 +26,8 @@ export default class TextureWorld {
     this.texture = texture;
 
     //get rid of blur
-    this.texture.minFilter = THREE.NearestFilter;
-    this.texture.magFilter = THREE.NearestFilter;
+    // this.texture.minFilter = THREE.NearestFilter;
+    // this.texture.magFilter = THREE.NearestFilter;
     this.texture.flipY = false;
 
     this.texture.needsUpdate = true;

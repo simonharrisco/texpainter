@@ -13,7 +13,7 @@ export default class TextureCamera {
 
   setInstance() {
     this.instance = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-    this.instance.position.set(0, 0, 0);
+    this.instance.position.set(0, 0, 1);
     this.scene.add(this.instance);
   }
 }
