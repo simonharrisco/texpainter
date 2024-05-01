@@ -14,6 +14,8 @@ export default class World {
     this.scene.background = new THREE.Color(0xa0a0a0);
     this.scene.fog = new THREE.Fog(0xa0a0a0, 1, 200);
 
+    this.raycaster = new THREE.Raycaster();
+
     this.resources = this.experience.resources;
     // shit has loaded -> add it to scene ?
     this.resources.on("ready", () => {
@@ -24,8 +26,21 @@ export default class World {
 
   addStage() {
     this.ambientLight = new AmbientLight();
-    this.directionalLight = new DirectionalLight();
+
     this.floor = new Floor();
+
+    const cubeTextureLoader = new THREE.CubeTextureLoader();
+
+    this.environmentMap = cubeTextureLoader.load([
+      "/assets/environmentMaps/0/px.png",
+      "/assets/environmentMaps/0/nx.png",
+      "/assets/environmentMaps/0/py.png",
+      "/assets/environmentMaps/0/ny.png",
+      "/assets/environmentMaps/0/pz.png",
+      "/assets/environmentMaps/0/nz.png",
+    ]);
+
+    this.scene.environment = this.environmentMap;
   }
 
   addModelView(model) {
@@ -34,6 +49,24 @@ export default class World {
     } else {
       this.model = new ModelView(model);
     }
+  }
+
+  raycast() {
+    //cast a ray from the camera at the mouse position
+    this.raycaster.setFromCamera(
+      this.experience.mouse.normalisedPosition,
+      this.experience.camera.instance
+    );
+
+    const intersects = this.raycaster.intersectObjects(this.scene.children);
+
+    const relevant = [];
+    // only pay attention to meshs
+    intersects.forEach((intersect) => {
+      if (intersect.object.name != "floor" && intersect.object.name != "grid") {
+        this.experience.texWorld.handleIntersect(intersect);
+      }
+    });
   }
   playAnimation() {}
 }

@@ -9,7 +9,7 @@ export default class ModelView {
     this.scene = this.experience.scene;
 
     if (!model) {
-      this.currentAvatarModel = this.resources.items["hoodie"];
+      this.currentAvatarModel = this.resources.items["damagedHelmet"];
     } else {
       this.currentAvatarModel = model;
     }
@@ -27,7 +27,7 @@ export default class ModelView {
       this.currentAvatarModel.scene.scale.set(0.01, 0.01, 0.01);
       this.currentAvatarModel.scene.position.set(0, 0.5, 0);
     }
-
+    this.currentAvatarModel.scene.name = "avatar";
     this.scene.add(this.currentAvatarModel.scene);
   }
   extractTextures() {

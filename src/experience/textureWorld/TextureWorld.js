@@ -11,6 +11,11 @@ export default class TextureWorld {
     this.camera = this.experience.texCamera;
 
     this.resources = this.experience.resources;
+
+    this.createImagePlane();
+    this.createPointerSphere();
+  }
+  createImagePlane() {
     this.geometry = new THREE.PlaneGeometry(2, 2);
     this.material = new THREE.MeshBasicMaterial({
       color: 0xffffff,
@@ -20,6 +25,14 @@ export default class TextureWorld {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.scene.add(this.mesh);
   }
+  createPointerSphere() {
+    this.pointerSphere = new THREE.Mesh(
+      new THREE.SphereGeometry(0.02, 32, 32),
+      new THREE.MeshBasicMaterial({ color: 0x00ff00, opacity: 0.5 })
+    );
+    this.scene.add(this.pointerSphere);
+  }
+
   setMaterialTexture(child) {
     let texture = child.material.map;
     this.scene.remove(this.mesh);
@@ -71,6 +84,15 @@ export default class TextureWorld {
 
     this.scene.add(this.displayMesh);
   }
+
+  handleIntersect(intersect) {
+    this.pointerSphere.position.set(
+      (intersect.uv.x % 1) * 2 - 1,
+      (intersect.uv.y % 1) * 2 - 1,
+      0
+    );
+  }
+
   destroy() {
     this.scene.remove(this.mesh);
     this.scene.remove(this.displayMesh);

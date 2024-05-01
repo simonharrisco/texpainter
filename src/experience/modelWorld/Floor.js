@@ -16,12 +16,14 @@ export default class Floor {
     this.mesh.rotation.x = -Math.PI / 2;
     this.mesh.receiveShadow = true;
     this.mesh.position.y = -0.08;
+    this.mesh.name = "floor";
     this.scene.add(this.mesh);
 
     this.grid = new THREE.GridHelper(50, 50, 0x000000, 0x000000);
     this.grid.material.opacity = 0.2;
     this.grid.material.transparent = true;
     this.grid.position.y = -0.08;
+    this.grid.name = "grid";
     this.scene.add(this.grid);
   }
 }

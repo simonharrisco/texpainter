@@ -9,6 +9,7 @@ import World from "./modelWorld/World";
 import TextureCamera from "./textureWorld/TextureCamera";
 import TextureRenderer from "./textureWorld/TextureRenderer";
 import TextureWorld from "./textureWorld/TextureWorld";
+import Mouse from "./utils/Mouse";
 
 // turning the experience into a singleton.
 let instance = null;
@@ -24,6 +25,7 @@ export default class Experience {
     // global useful
     this.time = new Time();
     this.resources = new Resources(assetPaths);
+    this.mouse = new Mouse();
 
     // for the 3d scene
     this.canvas = canvas;
@@ -59,6 +61,7 @@ export default class Experience {
     this.renderer.update();
     this.texRenderer.update();
     this.world.playAnimation();
+    this.world.raycast();
   }
 
   initModel(model) {
