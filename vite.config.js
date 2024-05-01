@@ -1,6 +1,6 @@
 export default {
-  root: "src/",
-  publicDir: "../assets/",
+  root: "./",
+  publicDir: "./assets",
   base: "./",
   server: {
     host: true, // Open to local network and display URL

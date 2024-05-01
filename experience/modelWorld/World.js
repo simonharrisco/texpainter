@@ -32,12 +32,12 @@ export default class World {
     const cubeTextureLoader = new THREE.CubeTextureLoader();
 
     this.environmentMap = cubeTextureLoader.load([
-      "/assets/environmentMaps/0/px.png",
-      "/assets/environmentMaps/0/nx.png",
-      "/assets/environmentMaps/0/py.png",
-      "/assets/environmentMaps/0/ny.png",
-      "/assets/environmentMaps/0/pz.png",
-      "/assets/environmentMaps/0/nz.png",
+      "/environmentMaps/0/px.png",
+      "/environmentMaps/0/nx.png",
+      "/environmentMaps/0/py.png",
+      "/environmentMaps/0/ny.png",
+      "/environmentMaps/0/pz.png",
+      "/environmentMaps/0/nz.png",
     ]);
 
     this.scene.environment = this.environmentMap;
