@@ -51,4 +51,10 @@ export default class Resources extends EventEmitter {
       this.trigger("ready");
     }
   }
+
+  loadGLTF(url, callback) {
+    this.loaders.gltfLoader.load(url, (gltf) => {
+      callback(gltf);
+    });
+  }
 }

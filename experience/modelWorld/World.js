@@ -13,14 +13,15 @@ export default class World {
     this.scene = this.experience.scene;
     this.scene.background = new THREE.Color(0xa0a0a0);
     this.scene.fog = new THREE.Fog(0xa0a0a0, 1, 200);
+    this.model = new ModelView();
 
     this.raycaster = new THREE.Raycaster();
 
     this.resources = this.experience.resources;
     // shit has loaded -> add it to scene ?
-    this.resources.on("ready", () => {
-      this.addModelView();
-    });
+    this.resources.on("ready", () => {});
+
+    //this.addModelView();
     this.addStage();
   }
 
@@ -44,10 +45,10 @@ export default class World {
   }
 
   addModelView(model) {
-    if (!model) {
-      this.model = new ModelView();
-    } else {
-      this.model = new ModelView(model);
+    if (this.model) {
+      console.log("here?");
+      this.model.addNewModel(model);
+      return;
     }
   }
 

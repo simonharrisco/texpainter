@@ -34,6 +34,9 @@ export default class TextureWorld {
   }
 
   setMaterialTexture(child) {
+    if (this.mesh) this.scene.remove(this.mesh);
+    if (this.displayMesh) this.scene.remove(this.displayMesh);
+
     let texture = child.material.map;
     this.scene.remove(this.mesh);
     this.texture = texture;

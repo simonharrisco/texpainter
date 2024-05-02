@@ -8,33 +8,50 @@ export default class ModelView {
     this.resources = this.experience.resources;
     this.scene = this.experience.scene;
 
-    if (!model) {
-      this.currentAvatarModel = this.resources.items["damagedHelmet"];
-    } else {
-      this.currentAvatarModel = model;
+    // if (!model) {
+    //   this.currentAvatarModel = this.resources.items["damagedHelmet"];
+    // } else {
+    //   this.currentAvatarModel = model;
+    // }
+
+    // this.createAvatar();
+    // this.extractTextures();
+  }
+  addNewModel(model) {
+    if (this.currentAvatarModel) {
+      this.scene.remove(this.currentAvatarModel.scene);
     }
+    this.currentAvatarModel = model;
 
     this.createAvatar();
     this.extractTextures();
   }
+
   createAvatar() {
+    console.log("called");
+
     this.currentAvatarModel.scene.traverse(function (node) {
       if (node.isMesh) {
         node.castShadow = true;
       }
     });
-    if (this.currentAvatarModel == this.resources.items["hoodie"]) {
-      this.currentAvatarModel.scene.scale.set(0.01, 0.01, 0.01);
-      this.currentAvatarModel.scene.position.set(0, 0.5, 0);
-    }
+
+    const box3 = new THREE.Box3().setFromObject(this.currentAvatarModel.scene);
+    const size = new THREE.Vector3();
+    box3.getSize(size);
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 1 / maxDim;
+
+    console.log("scale", scale);
+
     this.currentAvatarModel.scene.name = "avatar";
+    this.currentAvatarModel.scene.scale.set(scale, scale, scale);
+    console.log(this.currentAvatarModel.scene);
     this.scene.add(this.currentAvatarModel.scene);
   }
   extractTextures() {
-    console.log(this.currentAvatarModel.scene);
     this.currentAvatarModel.scene.traverse((child) => {
       if (child?.material?.map) {
-        console.log("child", child);
         this.experience.texWorld.setMaterialTexture(child);
       }
     });
