@@ -10,6 +10,9 @@ import TextureCamera from "./textureWorld/TextureCamera";
 import TextureRenderer from "./textureWorld/TextureRenderer";
 import TextureWorld from "./textureWorld/TextureWorld";
 import Mouse from "./utils/Mouse";
+import { inject } from "@vercel/analytics";
+
+inject();
 
 // turning the experience into a singleton.
 let instance = null;
