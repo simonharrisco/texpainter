@@ -15,7 +15,7 @@ uploadBox.addEventListener("change", (e) => {
   // get the file as a gltf
   let file = e.target.files[0];
 
-  const url = URL.createObjectURL(file);
+  const url = typeof rootFile === "string" ? file : URL.createObjectURL(file);
   experience.resources.loadGLTF(url, (gltf) => {
     experience.world.addModelView(gltf);
   });
